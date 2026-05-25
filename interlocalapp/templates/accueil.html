@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestConnect - Investissez dans l'avenir du Cameroun</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #1a1a1a; background: #fff; }
+
+        /* NAV */
+        nav {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 60px; height: 64px; background: #fff;
+            border-bottom: 1px solid #e8e8e8; position: sticky; top: 0; z-index: 100;
+        }
+        .nav-logo { font-size: 18px; font-weight: 700; color: #1a1a1a; text-decoration: none; }
+        .nav-logo span { color: #2d7a4f; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { text-decoration: none; color: #444; font-size: 14px; }
+        .nav-links a:hover { color: #2d7a4f; }
+        .nav-cta {
+            background: #2d7a4f; color: #fff; padding: 10px 22px;
+            border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600;
+        }
+        .nav-cta:hover { background: #246040; }
+
+        /* HERO */
+        .hero {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 80px 60px; background: #f7faf8; min-height: 480px;
+        }
+        .hero-text { max-width: 520px; }
+        .hero-text h1 { font-size: 42px; font-weight: 800; line-height: 1.2; color: #0f2e1e; margin-bottom: 20px; }
+        .hero-text h1 span { color: #2d7a4f; }
+        .hero-text p { font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 32px; max-width: 440px; }
+        .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primary {
+            background: #2d7a4f; color: #fff; padding: 13px 26px;
+            border-radius: 7px; text-decoration: none; font-size: 15px; font-weight: 600;
+        }
+        .btn-primary:hover { background: #246040; }
+        .btn-outline {
+            background: #fff; color: #2d7a4f; padding: 13px 26px;
+            border-radius: 7px; text-decoration: none; font-size: 15px; font-weight: 600;
+            border: 2px solid #2d7a4f;
+        }
+        .btn-outline:hover { background: #f0f9f4; }
+        .hero-image {
+            width: 420px; height: 300px; border-radius: 14px;
+            background: linear-gradient(135deg, #1a3a2a 0%, #2d7a4f 100%);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; overflow: hidden;
+        }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+        .hero-img-placeholder {
+            color: #fff; font-size: 14px; text-align: center; padding: 20px;
+            opacity: 0.7;
+        }
+
+        /* STATS */
+        .stats-bar {
+            background: #0f2e1e; padding: 40px 60px;
+            display: flex; justify-content: space-around; gap: 20px;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 36px; font-weight: 800; color: #fff; }
+        .stat-label { font-size: 13px; color: #7dbf97; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* SECTIONS */
+        .section { padding: 70px 60px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+        .section-tag { font-size: 11px; color: #2d7a4f; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .section-title { font-size: 26px; font-weight: 700; color: #0f2e1e; }
+        .see-all { font-size: 14px; color: #2d7a4f; text-decoration: none; font-weight: 600; }
+        .see-all:hover { text-decoration: underline; }
+
+        /* PROJECTS */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .project-card {
+            border: 1px solid #e8e8e8; border-radius: 12px; overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .project-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
+        .project-img {
+            width: 100%; height: 180px; background: #d4edda;
+            display: flex; align-items: center; justify-content: center;
+            color: #2d7a4f; font-size: 13px; position: relative; overflow: hidden;
+        }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; }
+        .project-badge {
+            position: absolute; top: 12px; left: 12px;
+            background: #2d7a4f; color: #fff; font-size: 11px; font-weight: 700;
+            padding: 4px 10px; border-radius: 20px; text-transform: uppercase;
+        }
+        .project-body { padding: 18px; }
+        .project-body h3 { font-size: 16px; font-weight: 700; color: #0f2e1e; margin-bottom: 8px; }
+        .project-body p { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 14px; }
+        .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin-bottom: 6px; }
+        .progress-bar { background: #e8e8e8; border-radius: 10px; height: 8px; margin-bottom: 14px; }
+        .progress-fill { height: 8px; border-radius: 10px; background: #2d7a4f; }
+        .btn-card {
+            display: block; text-align: center; background: #f0f9f4; color: #2d7a4f;
+            padding: 10px; border-radius: 7px; text-decoration: none; font-size: 13px; font-weight: 600;
+            border: 1px solid #c3e6d0;
+        }
+        .btn-card:hover { background: #2d7a4f; color: #fff; }
+
+        /* FEATURES */
+        .features-section { background: #f7faf8; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+        .feature-card { background: #fff; border-radius: 10px; padding: 24px; border: 1px solid #e8e8e8; }
+        .feature-icon {
+            width: 44px; height: 44px; background: #e8f5ee; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+        }
+        .feature-icon svg { width: 22px; height: 22px; fill: #2d7a4f; }
+        .feature-card h4 { font-size: 14px; font-weight: 700; color: #0f2e1e; margin-bottom: 8px; }
+        .feature-card p { font-size: 13px; color: #666; line-height: 1.5; }
+
+        /* WHY */
+        .why-section { padding: 70px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .why-text .section-tag { margin-bottom: 6px; }
+        .why-text h2 { font-size: 28px; font-weight: 800; color: #0f2e1e; margin-bottom: 16px; }
+        .why-text p { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 24px; }
+        .why-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .why-list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #333; }
+        .why-list li::before {
+            content: '✓'; width: 22px; height: 22px; background: #2d7a4f; color: #fff;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700; flex-shrink: 0;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials { background: #f7faf8; padding: 70px 60px; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 36px; }
+        .testimonial-card { background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #e8e8e8; }
+        .testimonial-card p { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #2d7a4f; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+        .avatar.blue { background: #1a5fa8; }
+        .avatar.orange { background: #c06b1a; }
+        .author-name { font-size: 13px; font-weight: 700; color: #0f2e1e; }
+        .author-role { font-size: 12px; color: #888; }
+
+        /* CTA */
+        .cta-section {
+            background: #0f2e1e; padding: 80px 60px; text-align: center;
+        }
+        .cta-section h2 { font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 14px; }
+        .cta-section p { font-size: 16px; color: #7dbf97; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .btn-white { background: #fff; color: #0f2e1e; padding: 14px 28px; border-radius: 7px; text-decoration: none; font-size: 15px; font-weight: 700; }
+        .btn-white:hover { background: #e8f5ee; }
+        .btn-green-outline { background: transparent; color: #fff; padding: 14px 28px; border-radius: 7px; text-decoration: none; font-size: 15px; font-weight: 700; border: 2px solid rgba(255,255,255,0.4); }
+        .btn-green-outline:hover { border-color: #fff; }
+
+        /* FOOTER */
+        footer { background: #1a1a1a; padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-logo { font-size: 16px; font-weight: 700; color: #fff; }
+        .footer-logo span { color: #2d7a4f; }
+        .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+        .footer-links a { font-size: 13px; color: #888; text-decoration: none; }
+        .footer-links a:hover { color: #fff; }
+        .footer-copy { font-size: 12px; color: #555; }
+
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .hero { flex-direction: column; padding: 40px 20px; gap: 30px; }
+            .hero-image { width: 100%; height: 220px; }
+            .hero-text h1 { font-size: 28px; }
+            .stats-bar { padding: 30px 20px; flex-wrap: wrap; gap: 24px; }
+            .section { padding: 50px 20px; }
+            .why-section { grid-template-columns: 1fr; padding: 50px 20px; gap: 30px; }
+            .testimonials { padding: 50px 20px; }
+            .cta-section { padding: 60px 20px; }
+            .cta-section h2 { font-size: 26px; }
+            footer { flex-direction: column; padding: 30px 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="/" class="nav-logo">Invest<span>Connect</span></a>
+    <div class="nav-links">
+        <a href="/">Accueil</a>
+        <a href="/projets/">Explorer les projets</a>
+        <a href="/utilisateurs/">Soumettre un projet</a>
+        <a href="#">À propos</a>
+    </div>
+    <a href="/utilisateurs/" class="nav-cta">S'inscrire</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Investissez dans<br><span>l'avenir du Cameroun</span></h1>
+        <p>
+            Nous connectons les entrepreneurs talentueux avec les capitaux
+            stratégiques pour bâtir une économie forte, innovante et durable au
+            cœur de l'Afrique Centrale.
+        </p>
+        <div class="hero-btns">
+            <a href="/projets/" class="btn-primary">Explorer les projets ↗</a>
+            <a href="#proposer" class="btn-outline">Proposer un projet</a>
+        </div>
+    </div>
+    <div class="hero-image">
+        <!-- Remplace src par une vraie image si tu en as une -->
+        <div class="hero-img-placeholder">
+            📊 Plateforme d'investissement<br>local au Cameroun
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stat">
+        <div class="stat-value">120+</div>
+        <div class="stat-label">Projets financés</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">4,5B</div>
+        <div class="stat-label">CFA investis</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">850</div>
+        <div class="stat-label">Investisseurs actifs</div>
+    </div>
+</div>
+
+<!-- PROJETS À LA UNE -->
+<section class="section">
+    <div class="section-header">
+        <div>
+            <div class="section-tag">Opportunités</div>
+            <div class="section-title">Projets à la une</div>
+        </div>
+        <a href="/projets/" class="see-all">Voir le catalogue →</a>
+    </div>
+    <div class="projects-grid">
+        {% for projet in projets %}
+        <div class="project-card">
+            <div class="project-img">
+                <span class="project-badge">{{ projet.categorie }}</span>
+                🌱
+            </div>
+            <div class="project-body">
+                <h3>{{ projet.titre }}</h3>
+                <p>{{ projet.description|truncatewords:18 }}</p>
+                <div class="progress-label">
+                    <span>Objectif : {{ projet.montant_objectif }} FCFA</span>
+                    <span>{% widthratio projet.montant_collecte projet.montant_objectif 100 %}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {% widthratio projet.montant_collecte projet.montant_objectif 100 %}%"></div>
+                </div>
+                <a href="/projets/{{ projet.pk }}/" class="btn-card">Détails du projet</a>
+            </div>
+        </div>
+        {% empty %}
+        <!-- Cartes de démonstration si pas de projets en base -->
+        <div class="project-card">
+            <div class="project-img" style="background:#d4edda;">
+                <span class="project-badge">AgriTech</span>
+                🌾
+            </div>
+            <div class="project-body">
+                <h3>Eco-Farm West Region</h3>
+                <p>Système de gestion agricole automatisé pour une production optimisée et durable.</p>
+                <div class="progress-label">
+                    <span>Objectif : 5 000 000 FCFA</span>
+                    <span>73%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:73%"></div></div>
+                <a href="/projets/" class="btn-card">Détails du projet</a>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-img" style="background:#d1e8f5;">
+                <span class="project-badge">FinTech</span>
+                💳
+            </div>
+            <div class="project-body">
+                <h3>PayCamer Mobile Hub</h3>
+                <p>Solution de paiement mobile transformant le commerce et les transferts au Cameroun.</p>
+                <div class="progress-label">
+                    <span>Objectif : 10 000 000 FCFA</span>
+                    <span>60%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+                <a href="/projets/" class="btn-card">Détails du projet</a>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-img" style="background:#fff3cd;">
+                <span class="project-badge">Énergie</span>
+                ☀️
+            </div>
+            <div class="project-body">
+                <h3>SolarVillage Kribi</h3>
+                <p>Infrastructure solaire intelligente pour l'électrification rurale dans la région Sud.</p>
+                <div class="progress-label">
+                    <span>Objectif : 8 000 000 FCFA</span>
+                    <span>85%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" style="width:85%"></div></div>
+                <a href="/projets/" class="btn-card">Détails du projet</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- FEATURES + WHY -->
+<section class="features-section section">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+        <div>
+            <div class="section-tag">Confiance & Sécurité</div>
+            <div class="section-title" style="margin-bottom: 28px;">Pourquoi choisir InvestConnect ?</div>
+            <div class="features-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.25C17.25 23.15 21 18.25 21 13V7L12 2z"/></svg>
+                    </div>
+                    <h4>Sécurité totale</h4>
+                    <p>Protection de vos fonds avec vérification KYC et escrow sécurisé.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+                    </div>
+                    <h4>Transparence</h4>
+                    <p>Reporting régulier et suivi en temps réel de la performance de vos actifs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h4>Accompagnement</h4>
+                    <p>Expertise technique et conseils pour maximiser vos investissements au Cameroun.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm-5 11.5A2.5 2.5 0 1112.5 13 2.5 2.5 0 0115 15.5z"/></svg>
+                    </div>
+                    <h4>Impact Local</h4>
+                    <p>Chaque franc investi transforme directement la vie des communautés locales.</p>
+                </div>
+            </div>
+        </div>
+        <div class="why-text" style="padding-top: 36px;">
+            <p style="font-size:15px; color:#555; line-height:1.8; margin-bottom:24px;">
+                InvestConnect est la première plateforme d'investissement participatif au
+                Cameroun, rapprochant les investisseurs nationaux et internationaux des
+                entrepreneurs les plus prometteurs. Nous offrons une due diligence rigoureuse
+                et un suivi transparent de chaque projet.
+            </p>
+            <ul class="why-list">
+                <li>Audit complet de chaque porteur de projet</li>
+                <li>Contrats sécurisés et automatisés</li>
+                <li>Support client dédié 24/7</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="testimonials">
+    <div style="text-align:center; margin-bottom: 10px;">
+        <div class="section-tag" style="display:inline-block;">Témoignages</div>
+    </div>
+    <div style="text-align:center;">
+        <div class="section-title">Ils nous font confiance</div>
+    </div>
+    <div class="testimonials-grid">
+        <div class="testimonial-card">
+            <p>"InvestConnect a transformé ma façon d'investir. J'ai trouvé des projets locaux à fort impact et mes rendements dépassent mes attentes !"</p>
+            <div class="testimonial-author">
+                <div class="avatar">TN</div>
+                <div>
+                    <div class="author-name">Tatiana Ngo'o</div>
+                    <div class="author-role">Investisseuse, Yaoundé</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card">
+            <p>"Grâce à la plateforme, nous avons levé 5M de francs en 3 semaines. La transformation de notre commerce est en marche !"</p>
+            <div class="testimonial-author">
+                <div class="avatar blue">MB</div>
+                <div>
+                    <div class="author-name">Mathieu Bela'a Nkeng</div>
+                    <div class="author-role">Porteur de projet, Douala</div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card">
+            <p>"La transparence est ce qui m'a convaincu. Je suis chaque étape de mon investissement en temps réel. Excellent travail !"</p>
+            <div class="testimonial-author">
+                <div class="avatar orange">JA</div>
+                <div>
+                    <div class="author-name">Jean-Luc Ambam</div>
+                    <div class="author-role">Investisseur, Bafoussam</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+    <h2>Prêt à bâtir l'économie<br>de demain ?</h2>
+    <p>Rejoignez des milliers d'investisseurs et d'entrepreneurs qui transforment le paysage économique du Cameroun.</p>
+    <div class="cta-btns">
+        <a href="/utilisateurs/" class="btn-white">Créer un compte investisseur</a>
+        <a href="#proposer" class="btn-green-outline">Lancer mon projet</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">Invest<span>Connect</span></div>
+    <div class="footer-links">
+        <a href="/projets/">Explorer les projets</a>
+        <a href="/utilisateurs/">Investisseurs</a>
+        <a href="#">À propos</a>
+        <a href="/api/">API</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="footer-copy">© 2025 InvestConnect. Tous droits réservés.</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Investissements - InterLocal{% endblock %}
+{% block content %}
+    <h1>💰 Investissements</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Investisseur</th>
+                <th>Projet</th>
+                <th>Montant (FCFA)</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inv in investissements %}
+            <tr>
+                <td>{{ inv.investisseur.nom }} {{ inv.investisseur.prenom }}</td>
+                <td>{{ inv.projet.titre }}</td>
+                <td>{{ inv.montant }}</td>
+                <td>{{ inv.date_investissement|date:"d/m/Y H:i" }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" style="text-align:center; color:#888;">Aucun investissement trouvé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

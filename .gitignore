@@ -1,0 +1,16 @@
+# Crée le fichier .gitignore
+echo "__pycache__/
+*.py[cod]
+*.env
+.env
+venv/
+env/
+.venv/
+*.sqlite3
+*.db
+node_modules/
+.idea/
+.vscode/
+dist/
+build/
+*.egg-info/" > .gitignore

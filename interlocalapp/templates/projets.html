@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Projets - InterLocal{% endblock %}
+{% block content %}
+    <h1>📁 Tous les Projets</h1>
+    {% for projet in projets %}
+    <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>{{ projet.titre }}</h2>
+            <span class="badge badge-{{ projet.statut }}">{{ projet.get_statut_display }}</span>
+        </div>
+        <p style="color:#666; margin: 8px 0;">{{ projet.description|truncatewords:25 }}</p>
+        <p><strong>Porteur :</strong> {{ projet.porteur.nom }} {{ projet.porteur.prenom }}</p>
+        <p><strong>Catégorie :</strong> {{ projet.categorie }}</p>
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {% widthratio projet.montant_collecte projet.montant_objectif 100 %}%"></div>
+        </div>
+        <p style="font-size:13px; color:#888;">
+            {{ projet.montant_collecte }} / {{ projet.montant_objectif }} FCFA
+            &nbsp;|&nbsp; Fin : {{ projet.date_fin }}
+        </p>
+        <a href="/projets/{{ projet.pk }}/" class="btn btn-primary" style="display:inline-block; margin-top:10px;">Voir détails</a>
+    </div>
+    {% empty %}
+        <p>Aucun projet trouvé.</p>
+    {% endfor %}
+{% endblock %}

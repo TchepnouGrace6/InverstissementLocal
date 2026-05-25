@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{{ projet.titre }} - InterLocal{% endblock %}
+{% block content %}
+    <a href="/projets/" style="color:#3498db;">← Retour aux projets</a>
+    <div class="card" style="margin-top:15px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h1>{{ projet.titre }}</h1>
+            <span class="badge badge-{{ projet.statut }}">{{ projet.get_statut_display }}</span>
+        </div>
+        <p style="margin: 15px 0; color:#555;">{{ projet.description }}</p>
+        <hr style="margin:15px 0; border:none; border-top:1px solid #ecf0f1;">
+        <p><strong>Porteur :</strong> {{ projet.porteur.nom }} {{ projet.porteur.prenom }}</p>
+        <p><strong>Catégorie :</strong> {{ projet.categorie }}</p>
+        <p><strong>Début :</strong> {{ projet.date_debut }} &nbsp;|&nbsp; <strong>Fin :</strong> {{ projet.date_fin }}</p>
+        <div class="progress-bar" style="margin-top:15px;">
+            <div class="progress-fill" style="width: {% widthratio projet.montant_collecte projet.montant_objectif 100 %}%"></div>
+        </div>
+        <p style="margin-top:8px;">
+            <strong>{{ projet.montant_collecte }} FCFA</strong> collectés sur
+            <strong>{{ projet.montant_objectif }} FCFA</strong>
+        </p>
+    </div>
+
+    <h2 style="margin-top:25px;">💰 Investissements</h2>
+    {% for inv in projet.investissements.all %}
+    <div class="card">
+        <p><strong>{{ inv.investisseur.nom }} {{ inv.investisseur.prenom }}</strong> — {{ inv.montant }} FCFA</p>
+        <p style="color:#888; font-size:13px;">{{ inv.date_investissement }}</p>
+    </div>
+    {% empty %}
+        <p style="color:#888;">Aucun investissement pour ce projet.</p>
+    {% endfor %}
+{% endblock %}

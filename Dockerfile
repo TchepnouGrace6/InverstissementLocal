@@ -5,7 +5,14 @@ FROM python:3.13-slim AS builder
 
 WORKDIR /app
 
-# Copier et installer les dépendances
+# Installer les dépendances système pour mysqlclient
+RUN apt-get update && apt-get install -y \
+    gcc \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copier et installer les dépendances Python
 COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
@@ -16,6 +23,11 @@ RUN pip install --upgrade pip && \
 FROM python:3.13-slim AS production
 
 WORKDIR /app
+
+# Installer les libs runtime MySQL (nécessaires à l'exécution)
+RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Créer un utilisateur non-root (sécurité)
 RUN addgroup --system appgroup && \

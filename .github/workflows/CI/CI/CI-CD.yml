@@ -1,4 +1,4 @@
-name: "🚀 CI/CD Pipeline - Kaba-Delivery"
+name: "🚀 CI/CD Pipeline - InterLocal"
 
 on:
   push:

@@ -1,6 +1,17 @@
 from django.urls import path, include
 from rest_framework import routers
-from .view import *
+from .view import (
+    UtilisateurViewSet,
+    CategorieViewSet,
+    ProjetViewSet,
+    InvestissementViewSet,
+    ValidationProjetViewSet,
+    accueil,
+    liste_projets,
+    detail_projet,
+    liste_utilisateurs,
+    liste_investissements,
+)
 
 router = routers.DefaultRouter()
 router.register('utilisateurs', UtilisateurViewSet)
